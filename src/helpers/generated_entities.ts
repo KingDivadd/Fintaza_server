@@ -32,3 +32,14 @@ export function generate_referral_code() {
     return otp;
 }
 
+export function generate_password() {
+    const characters = '0123456789Lssabspace';
+    let otp = '';
+
+    for (let i = 0; i < 6; i++) {
+        const random_index = Math.floor(Math.random() * characters.length);
+        otp += characters.charAt(random_index);
+    }
+
+    return otp;
+}

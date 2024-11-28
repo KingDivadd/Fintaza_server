@@ -26,6 +26,8 @@ model User  {
   address                         String
   is_verified                     Boolean        @default(true)
   is_active                       Boolean        @default(true)
+
+  is_trashed                      Boolean        @default(false)
   sessions                        Session[]
   
   created_at                      Decimal

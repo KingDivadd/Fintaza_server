@@ -14,7 +14,6 @@ import connect_to_mongo_db from './config/mongodb';
 import index from './routes/index'
 import not_found from  './middlewares/not_found'
 import check_network_availability from './middlewares/network_availability'
-import { chat_validation, notification_validation, video_validation } from './validations';
 import { check_user_availability, socket_verify_auth_id } from './helpers/auth_helper';
 import prisma from './helpers/prisma_initializer';
 import converted_datetime, { readable_date } from './helpers/date_time_elements';
