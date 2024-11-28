@@ -59,7 +59,7 @@ const start = async () => {
     const PORT = port || 4000;
     try {
         await connect_to_mongo_db();
-        server.listen(PORT, () => console.log(`EaseCredit server started and running on port ${PORT}`.cyan.bold));
+        server.listen(PORT, () => console.log(`Fintaza server started and running on port ${PORT}`.cyan.bold));
     } catch (err) {
         console.log(`something went wrong`.red.bold);
     }

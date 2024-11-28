@@ -16,6 +16,11 @@ model User  {
   business_name                   String? 
   email                           String          @unique
   password                        String
+  date_of_birth                   Decimal?
+  ssn                             String?
+  marital_status                  String?
+  number_of_dependents            Int?
+
   user_role                       Role
 
   code                            String
@@ -29,6 +34,8 @@ model User  {
 
   is_trashed                      Boolean        @default(false)
   sessions                        Session[]
+  employmentInfo                  EmploymentInfo[]
+  bankingInfo                  BankingInfo[]
   
   created_at                      Decimal
   updated_at                      Decimal
@@ -37,6 +44,60 @@ model User  {
 enum Role {
   admin
   user
+}
+
+model EmploymentInfo {
+    employmentInfo_id               String          @id @default(uuid()) @unique
+
+    employer_name                   String?
+    employer_address                String?
+    employment_type                 EmploymentTypeEnum
+    job_title                       String?
+    length_of_employment            String?        //in months
+    monthly_gross_income            Decimal?
+    monthly_net_income              Decimal?
+    work_phone_number               String?
+
+    additonal_income_source         String?
+
+    user                            User?        @relation(fields: [user_id], references: [user_id])
+    user_id                         String? 
+
+    created_at                      Decimal
+    updated_at                      Decimal
+}
+
+enum EmploymentTypeEnum {
+  full_time
+  part_time
+  self_employed
+  unemployed
+}
+
+model BankingInfo {
+  bankingInfo_id                  String          @id @default(uuid()) @unique
+  bank_name                       String
+  account_holder_name             String
+  routing_number                  String
+  account_type                    AccountType?
+  primary_bank_contact_number     String?
+  auto_debit                      AutoDebit   @default(enabled)
+
+  user                            User?        @relation(fields: [user_id], references: [user_id])
+  user_id                         String?   
+
+  created_at                      Decimal
+  updated_at                      Decimal
+}
+
+enum AutoDebit {
+  enabled
+  disabled
+}
+
+enum AccountType {
+  checking
+  savings
 }
 
 model Session {
