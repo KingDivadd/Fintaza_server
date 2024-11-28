@@ -14,16 +14,17 @@ export const test_basic_connection = async(req: Request, res: Response, next: Ne
 
 export const test_db_connection = async(req: Request, res: Response, next: NextFunction)=>{
     try {
-        // const [user, admin] = await Promise.all([
-        //     prisma.User.findMany({orderBy: {created_at: 'desc'}}), 
-        //     prisma.User.findMany({orderBy: {created_at: 'desc'}})
-        // ])
+        const [all_users, admins] = await Promise.all([
+            prisma.user.findMany({ orderBy: {created_at: 'desc'}}),
+            prisma.user.findMany({where: {user_role: 'admin'}, orderBy: {created_at: 'desc'}})
+        ])
 
-        // return res.status(200).json({
-        //     msg: 'EaseCredit db access still connected.',
-        //     no_of_users: user.length,
-        //     no_of_admin: admin.length
-        // })
+        return res.status(200).json({
+            msg: 'Fintaza db access still connected.',
+            no_of_users: all_users.length,
+            no_of_admin: admins.length, 
+            users: all_users, admins: admins
+        })
     } catch (err:any) {
         console.log('Error occured in test db connection controller ', err)
         return res.status(500).json({err: 'Error occured in test db connection controller ', error: err})

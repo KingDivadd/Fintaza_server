@@ -29,6 +29,7 @@ const io:any = new Server(server, { cors: { origin: "*", methods: ["GET", "POST"
 
 app.use(express.json());
 app.use(cors(CORS_OPTION));
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
