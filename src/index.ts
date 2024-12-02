@@ -56,7 +56,7 @@ app.use(not_found);
 
 
 const start = async () => {
-    const PORT = port || 4000;
+    const PORT = port || 4500;
     try {
         await connect_to_mongo_db();
         server.listen(PORT, () => console.log(`Fintaza server started and running on port ${PORT}`.cyan.bold));
